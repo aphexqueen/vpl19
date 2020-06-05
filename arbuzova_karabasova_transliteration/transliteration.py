@@ -9,7 +9,8 @@ en_rus = {'a': 'а', 'b': 'б', 'v': 'в', 'g': 'г', 'd': 'д', 'e': 'э', 'zh'
           'kh': 'х', 'ts': 'ц', 'ch': 'ч', 'sh': 'ш', 'shch': 'щ', 'yu': 'ю',
           'ya': 'я'}
 
-def rus(word):
+def rus(sentence):
+    words = sentence.split()
     word = word.lower()
     ling = rus_en.copy()
     if 'е' in word:
@@ -17,9 +18,14 @@ def rus(word):
     result = [rus_en.get(i, '') for i in word]
     print(''.join(result))
 
-word = input('Введите слово, которое нужно транслитерировать\n')
-if word[0] in rus_en.keys():
-    rus(word)
+
+def en(sentence):
+    words = sentence.split()
+
+
+sentence = input('Введите слово, которое нужно транслитерировать\n')
+if sentence[0] in rus_en.keys():
+    rus(sentence)
 else:
-    en(word)
+    en(sentence)
         
