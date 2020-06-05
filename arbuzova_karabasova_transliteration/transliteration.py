@@ -12,9 +12,30 @@ en_rus = {'a': 'а', 'b': 'б', 'v': 'в', 'g': 'г', 'd': 'д', 'ye': 'е', 'zh
 
 consonant = 'bcdfghjklmnpqrstvw'
 
+rus_vowels = 'еуыаоэюияъь'
+
 def rus(sentence):
-    result = ''
-    return result
+    words = [word.lower() for word in sentence.split()]
+    ling = rus_en.copy()
+    result_word = []
+    result = []
+    for word in words:
+        for i, letter in enumerate(word):
+            if letter == 'е' or letter == 'ё':
+                if i == 0 or (i - 1) > 0 and word[i-1] in rus_vowels:
+                    result_word += 'ye'
+                else:
+                    result_word += 'e'
+            elif letter == 'ъ' or letter == 'ь':
+                continue
+            elif letter in '=-/.?>,!@#$@#$%^&*()':
+                result_word += letter
+            else:
+                result_word += ling[letter]
+        result.append(''.join(result_word))
+        result_word = []   
+    
+    return ' '.join(result)
 
 
 def eng(sentence):
